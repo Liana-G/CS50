@@ -1,0 +1,45 @@
+## 查看Flask文档 https://flask.palletsprojects.com/en/stable/
+
+##文件：app.py和requirements.txt, request.args
+#app.py
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+  name = request.args.get("name", "world")
+
+# line9 等价于 line11-14
+  if "name" in request.args:
+    name = request.args["name"]
+  else:
+    name = "world"
+
+  name = request.args["name"]
+  return render_template("index.html", placeholder=name)
+
+
+## 路由文件index.html  放在hello/tempaltes文件夹中
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>hello</title>
+  </head>
+  <body>
+    hello, {{ placeholder }}
+  </body>
+</html>
+
+## html 类文件的开头结尾复用（除了body以外的部分），删除重复冗余的部分
+{% extends "layout.html" %}
+
+{% block body %}
+
+  hello, {{ name }}
+
+{% endblock %}
+
+
+## request.args 对应的是 GET 方法; request.form对应的是 POST 方法
