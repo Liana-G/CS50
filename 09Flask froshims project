@@ -1,0 +1,6 @@
+## Task: create a website called frosh IMs 
+# 未完待续。。。
+
+from flask improt Flask, render_template, request
+
+
